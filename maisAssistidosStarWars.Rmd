@@ -1,0 +1,32 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+dados <- read_csv("dados.csv")
+
+        
+seeAllMovies <- subset(dados, dados$'Have you seen any of the 6 films in the Star Wars franchise?' == 'Yes')
+
+percentAllMovies <- (length(seeAllMovies$RespondentID) / length(dados$RespondentID)) * 100
+femaleSubSet <- subset(dados, dados$Gender == 'Female')
+femaleAnswers <- (length(femaleSubSet$Gender))
+percentAllMovies
+femaleAnswers
+
+
+countries <- seeAllMovies %>% 
+             group_by(`Location (Census Region)`) %>%
+             summarise(countCountry = length(`Location (Census Region)`)) %>%
+             arrange(desc(countCountry))
+
+maisAssisitu <- ggplot(data = countries, aes(x = as.factor(`Location (Census Region)`),
+y = as.numeric(countCountry), fill = as.factor(`Location (Census Region)`))) + geom_bar(stat="identity", binwidth = NULL, na.rm = TRUE) + labs(x = "", y="Participants", fill="Location") + theme(axis.text.x = element_text(angle = 90, hjust=1))
+
+maisAssisitu
+```
+
