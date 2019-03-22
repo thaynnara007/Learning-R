@@ -37,7 +37,7 @@ pie(frequencia_refri, main = "Gráfico para a variável Refrigerante",
 legend(1,1,fill = c(22,18,15,11), legend = c("Coca-cola", "Pepsi", "Coca-cola light", "Sprite"), box.col=NA)
 ```
 
-  Exercicio 02
+  - Exercicio 02
     - a
 ```{r}
 
@@ -60,4 +60,14 @@ pie(frequencia_filhos, main = "Gráfico para variável número de filhos",
     col = c(2,3,4,5,6,7))
 legend(1,1, fill = c(2,3,4,5,6,7), legend = c("não informado","nenhum filho", "1 filho", "2 filhos", "3 filhos", "5 filhos"), box.col = NA)
 
+```
+  - Exemplo 04
+
+```{r}
+notas <-c(3.5,4,4.8,5.5,5.8,6,6,6.8,7,7,7.3,7.5,7.5,8,8.5,9,9.5,9.8,10,10)
+classes <- seq(3.5, 10, by=1.3)
+grafico_notas <- hist(notas, breaks = classes, right = FALSE, plot = TRUE)
+aux <- with(grafico_notas, 100*density*diff(breaks)[1])
+labs <- paste(round(aux), "%", sep="")
+plot(grafico_notas, freq = FALSE, labels = labs, ylab = "Densidade de frequência", xlab = "Notas", col = "orange", border = "white", main = "Histograma para variável Notas", xlim = c(3.5, 10), xaxp = c(3.5,10,5), ylim = c(0, .3))
 ```
